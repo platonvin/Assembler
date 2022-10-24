@@ -1,7 +1,3 @@
-push 7
-pop [0]
-push [0]
-push [0]
-add
+push rbx+7
 out
 hlt

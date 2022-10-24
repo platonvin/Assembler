@@ -18,9 +18,14 @@ int main()
     devide_in_lines(&ass_prog);
     compile(&ass_prog);
 
+    if(ass_prog.error != no_errors)
+    {
+        printf("ERROR = %d\n", ass_prog.error);
+    }
+
     for(size_t i = 0; i < max_elem_count; i++)
     {
-        printf("%02X ", (int)(unsigned char)(ass_prog.code[i]));
+        printf("%08X ", (long int)(ass_prog.code[i]));
         // fprintf(prog_compiled, "%02X ", (int)(unsigned char)(ass_prog.code[i]));
     }
     fwrite(ass_prog.code, sizeof(cmd_type), max_elem_count, prog_compiled);

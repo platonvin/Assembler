@@ -26,6 +26,10 @@ void devide_in_lines(ass_prog_t *ass_prog)
         {
             ass_prog->prog_text[i] = 0;
         }
+        else if(ass_prog->prog_text[i] == ';')
+        {
+            ass_prog->prog_text[i] = 0;
+        }
     }
 
     // printf("size %zu lines %zu\n", ass_prog->prog_size, ass_prog->prog_lines_size);
@@ -46,49 +50,64 @@ void devide_in_lines(ass_prog_t *ass_prog)
             cur_ch++;
         }
     }
-
-    for(size_t i = 0; i < ass_prog->prog_size; i++)
-    {
-        if(ass_prog->prog_text[i] == ';') 
-        {
-            ass_prog->prog_text[i] = 0;
-        }
-    }
+    
+    // for(size_t i = 0; i < ass_prog->prog_lines_size; i++)
+    // {
+    //     printf("%s\n", ass_prog->prog_lines[i]);
+    // }
 } 
 
-ass_registers get_reg_num(const char *reg)
+ass_registers get_reg_num(const char *reg, ass_prog_t *ass_prog)
 {
-    // printf("get reg num called\n");
+    ass_registers reg_num = err;
 
-    ass_registers reg_num;
+    printf("GETREG OF %s\n", reg);
 
     if(false) {}
     #include "defines/regs.h"
+
+    if(reg_num == err)
+    {
+        ass_prog->error = wrong_reg;
+    }
 
     return reg_num;
 }
 
 void compile_args(size_t *i, ass_prog_t *ass_prog, char *line, bool is_jump)
 {
-    // printf("compile args called\n");
-
     cut_first_word(line);    
     delete_spaces (line);
+
+    // for(size_t i = 0; i < ass_prog->prog_lines_size; i++)
+    // {
+    //     printf("%s\n", ass_prog->prog_lines[i]);
+    // }
 
     if(!is_jump)
     {
         cmd_type arg_num = 0;
         cmd_type arg_reg_num = 0;
-        char arg_reg_name[3] = {0};
+        char arg_reg_name[4] = {0};
 
         bool is_arg_num = false;
         bool is_arg_reg = false;
         bool is_arg_ram = false;
 
         if(false) {}
-        #include "defines/args.h"
-
-        // printf("cmp args copypast passed\n");
+        #define COMMA ,
+        _ARG_DEF_(2, %d+%3s, &arg_num COMMA &arg_reg_name,  0, 1, 1)
+        _ARG_DEF_(2, %3s%d, &arg_reg_name COMMA &arg_num,  0, 1, 1)
+        _ARG_DEF_(2, [%d+%3s], &arg_num COMMA &arg_reg_name,  1, 1, 1)
+        _ARG_DEF_(2, [%3s%d], &arg_reg_name COMMA &arg_num,  1, 1, 1)
+        _ARG_DEF_(1, %d, &arg_num, 0, 0, 1)
+        _ARG_DEF_(1, [%d], &arg_num, 1, 0, 1)
+        _ARG_DEF_(1, %3s, &arg_reg_name, 0, 1, 0)
+        _ARG_DEF_(1, [%3s], &arg_reg_name, 1, 1, 0)
+        else
+        {
+            ass_prog->error = args_error;
+        }
 
         size_t cmd_i = (*i) - 1;
 
@@ -99,7 +118,7 @@ void compile_args(size_t *i, ass_prog_t *ass_prog, char *line, bool is_jump)
         if(is_arg_reg)
         {
             ass_prog->code[cmd_i] += REG_BIT;
-            ass_prog->code[(*i)++] = get_reg_num(arg_reg_name);
+            ass_prog->code[(*i)++] = get_reg_num(arg_reg_name, ass_prog);
         }    
         if(is_arg_num)
         {

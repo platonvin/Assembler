@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <malloc.h>
 #include <assert.h>
+#include <math.h>
 
 typedef long cmd_type;
 
@@ -19,6 +20,6 @@ else if(cmd_num == num)\
 #define NUM_BIT 0x20000000
 
 #define MAX_RAM 256
-#define MAX_REG 8
+#define MAX_REG 9
 
 #endif //PROCESSOR_FUNCTIONS_H

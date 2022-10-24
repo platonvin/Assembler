@@ -18,6 +18,7 @@ typedef long cmd_type;
 #define _ARG_DEF_(arg_num, format, args, is_ram, is_reg, is_num) \
 else if(sscanf(line, #format, args) == arg_num)\
 {\
+    printf("%s, %d\n", #format, arg_num);\
     is_arg_num = is_num;\
     is_arg_reg = is_reg;\
     is_arg_ram = is_ram;\
@@ -33,8 +34,7 @@ else if(str_cmpr(#name, ass_prog->prog_lines[n]))\
     }\
 }
 
-#define _REG_DEF_(reg_name, reg_num) \
-    reg_name = reg_num,
+#define _REG_DEF_(reg_name, reg_num) reg_name = reg_num,
 
 enum ass_registers
 {
@@ -51,7 +51,10 @@ else if(str_cmpr(reg, #reg_name))\
 
 enum ass_errors
 {
+    no_errors = 0,
     flag_not_found = 1,
+    wrong_reg = 2,
+    args_error = 3,
 };
 
 struct ass_prog_t
@@ -69,7 +72,7 @@ struct ass_prog_t
     size_t flags[MAX_FLAG_NUM]= {0};
     size_t flag_num = 0;
 
-    ass_errors error;
+    ass_errors error = no_errors;
     FILE *log_file;
 };
 
@@ -78,7 +81,7 @@ struct ass_prog_t
 
 void devide_in_lines(ass_prog_t *ass_prog);
 
-ass_registers get_reg_num(const char *reg);
+ass_registers get_reg_num(const char *reg, ass_prog_t *ass_prog);
 
 void compile_args(size_t *i, ass_prog_t *ass_prog, char *line, bool is_jump);
 
