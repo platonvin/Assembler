@@ -3,17 +3,26 @@
 int main()
 {
     ass_prog_t ass_prog;
-    ass_prog.prog_file = fopen("program.ass", "r");
+
+    printf("file to compile?\n\n");
+    char program_name[256] = {0};
+    scanf("%s", program_name);
+
+    ass_prog.prog_file = fopen(program_name, "w");
     ass_prog.log_file = fopen("log_file.txt", "w");
 
-    FILE *prog_compiled = fopen("compiled.ass", "wb");
+    str_CAT(program_name, ".compiled");
+
+    FILE *prog_compiled = fopen(program_name, "wb");
 
     devide_in_lines(&ass_prog);
 
-    size_t max_elem_count = ass_prog.prog_lines_size * (MAX_ARG_NUM + 1) + 1;
-    ass_prog.code = (cmd_type*)calloc(max_elem_count, sizeof(cmd_type));
+        size_t max_elem_count = ass_prog.prog_lines_size * (MAX_ARG_NUM + 1) + 1;
+        ass_prog.code = (cmd_type*)calloc(max_elem_count, sizeof(cmd_type));
     
     compile(&ass_prog);
+
+    ass_prog.error = no_errors;
 
     devide_in_lines(&ass_prog);
     compile(&ass_prog);

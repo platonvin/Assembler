@@ -26,10 +26,6 @@ void devide_in_lines(ass_prog_t *ass_prog)
         {
             ass_prog->prog_text[i] = 0;
         }
-        else if(ass_prog->prog_text[i] == ';')
-        {
-            ass_prog->prog_text[i] = 0;
-        }
     }
 
     // printf("size %zu lines %zu\n", ass_prog->prog_size, ass_prog->prog_lines_size);
@@ -48,6 +44,14 @@ void devide_in_lines(ass_prog_t *ass_prog)
         while(ass_prog->prog_text[cur_ch] == 0)
         {
             cur_ch++;
+        }
+    }
+
+    for(size_t i = 0; i < ass_prog->prog_size; i++)
+    {
+        if(ass_prog->prog_text[i] == ';')
+        {
+            ass_prog->prog_text[i] = 0;
         }
     }
     
@@ -95,15 +99,7 @@ void compile_args(size_t *i, ass_prog_t *ass_prog, char *line, bool is_jump)
         bool is_arg_ram = false;
 
         if(false) {}
-        #define COMMA ,
-        _ARG_DEF_(2, %d+%3s, &arg_num COMMA &arg_reg_name,  0, 1, 1)
-        _ARG_DEF_(2, %3s%d, &arg_reg_name COMMA &arg_num,  0, 1, 1)
-        _ARG_DEF_(2, [%d+%3s], &arg_num COMMA &arg_reg_name,  1, 1, 1)
-        _ARG_DEF_(2, [%3s%d], &arg_reg_name COMMA &arg_num,  1, 1, 1)
-        _ARG_DEF_(1, %d, &arg_num, 0, 0, 1)
-        _ARG_DEF_(1, [%d], &arg_num, 1, 0, 1)
-        _ARG_DEF_(1, %3s, &arg_reg_name, 0, 1, 0)
-        _ARG_DEF_(1, [%3s], &arg_reg_name, 1, 1, 0)
+            #include "defines/args.h"
         else
         {
             ass_prog->error = args_error;
@@ -170,6 +166,8 @@ void compile(ass_prog_t *ass_prog)
             continue;
         }
 
+        printf("SSSSSSSSSSSSSSSSSS %s\n", ass_prog->prog_lines[n]);
+
         if(false) {}
         #include "defines/commands.h"
     }
@@ -178,4 +176,11 @@ void compile(ass_prog_t *ass_prog)
     // {
     //     printf("%s\n", &ass_prog->flag_names[i * MAX_FLAG_NAME_SIZE]);
     // }
+}
+
+
+void error_print(int error_num)
+{
+    if(false) {}
+    #include "defines/errors.h"
 }

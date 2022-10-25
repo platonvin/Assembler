@@ -18,7 +18,7 @@ typedef long cmd_type;
 #define _ARG_DEF_(arg_num, format, args, is_ram, is_reg, is_num) \
 else if(sscanf(line, #format, args) == arg_num)\
 {\
-    printf("%s, %d\n", #format, arg_num);\
+    printf("ARG DEF %s, %d\n", #format, arg_num);\
     is_arg_num = is_num;\
     is_arg_reg = is_reg;\
     is_arg_ram = is_ram;\
@@ -49,13 +49,20 @@ else if(str_cmpr(reg, #reg_name))\
     reg_num = reg_name;\
 }
 
+#define _ERR_DEF_(name, num) name = num,
+
 enum ass_errors
 {
-    no_errors = 0,
-    flag_not_found = 1,
-    wrong_reg = 2,
-    args_error = 3,
+    #include "defines/errors.h"
 };
+
+#undef _ERR_DEF_
+
+#define _ERR_DEF_(name, num) \
+if(error_num == num)\
+{\
+    printf(#name "\n");\
+}
 
 struct ass_prog_t
 {
@@ -76,9 +83,6 @@ struct ass_prog_t
     FILE *log_file;
 };
 
-
-// ass_prog_t new_ass_prog();
-
 void devide_in_lines(ass_prog_t *ass_prog);
 
 ass_registers get_reg_num(const char *reg, ass_prog_t *ass_prog);
@@ -88,5 +92,7 @@ void compile_args(size_t *i, ass_prog_t *ass_prog, char *line, bool is_jump);
 void compile(ass_prog_t *ass_prog);
 
 cmd_type get_cmd_num(char *line);
+
+void error_print(int error_num);
 
 #endif //ASSEMBLER_FUNCTIONS_H
