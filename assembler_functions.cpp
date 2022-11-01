@@ -45,6 +45,11 @@ void devide_in_lines(ass_prog_t *ass_prog)
         {
             cur_ch++;
         }
+
+        if(cur_ch >= ass_prog->prog_size)
+        {
+            cur_ch--;
+        }
     }
 
     for(size_t i = 0; i < ass_prog->prog_size; i++)
@@ -54,18 +59,43 @@ void devide_in_lines(ass_prog_t *ass_prog)
             ass_prog->prog_text[i] = 0;
         }
     }
-    
-    // for(size_t i = 0; i < ass_prog->prog_lines_size; i++)
-    // {
-    //     printf("%s\n", ass_prog->prog_lines[i]);
-    // }
+
+    for(size_t i = 0; i < ass_prog->prog_lines_size; i++)
+    {
+        size_t j = 0;
+        while(ass_prog->prog_lines[i][j] == ' ')
+        {
+            // printf("%c CH ", ass_prog->prog_lines[i][j]);
+            j++;
+        }
+
+        // printf("j = %zu", j);
+
+        if(j != 0)
+        {
+            size_t k = j;
+            for(; ass_prog->prog_lines[i][k] != 0; k++)
+            {
+                // printf("%c", ass_prog->prog_lines[i][k - j]);
+                // printf("%c", ass_prog->prog_lines[i][k]);
+                ass_prog->prog_lines[i][k - j] = ass_prog->prog_lines[i][k];
+            }
+            ass_prog->prog_lines[i][k - j] = 0;
+        }
+    }
+
+    for(size_t i = 0; i < ass_prog->prog_lines_size; i++)
+    {
+        printf("%p\n", ass_prog->prog_lines[i]);
+        printf("%s\n\n", ass_prog->prog_lines[i]);
+    }
 } 
 
 ass_registers get_reg_num(const char *reg, ass_prog_t *ass_prog)
 {
     ass_registers reg_num = err;
 
-    printf("GETREG OF %s\n", reg);
+    // printf("GETREG OF %s\n", reg);
 
     if(false) {}
     #include "defines/regs.h"
@@ -166,7 +196,7 @@ void compile(ass_prog_t *ass_prog)
             continue;
         }
 
-        printf("SSSSSSSSSSSSSSSSSS %s\n", ass_prog->prog_lines[n]);
+        // printf("SSSSSSSSSSSSSSSSSS %s\n", ass_prog->prog_lines[n]);
 
         if(false) {}
         #include "defines/commands.h"

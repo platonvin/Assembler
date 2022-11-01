@@ -38,6 +38,7 @@ int main()
 
     stack_t *stack = stack_new();
     cmd_type ram[MAX_RAM] = {0};
+    cmd_type vram[MAX_VRAM] = {0};
     cmd_type reg[MAX_REG] = {0};
 
     stack->log_file = log_file;

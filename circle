@@ -1,0 +1,90 @@
+IN
+POP RAX; radius
+IN 
+POP RBP
+
+PUSH 100; I
+FLAG1:
+
+DUP; I I
+POP RDX; I
+
+    PUSH 100; I J
+    FLAG2:
+
+        DUP; I J J
+        POP RSP; I J; RSP = J
+
+        PUSH RAX; I J R
+        DUP
+        IMUL; I J R2
+
+        PUSH RDX
+        PUSH 50
+        SUB
+        DUP
+        IMUL; I J R2 (Y-50)2
+
+        PUSH RSP
+        PUSH 50
+        SUB
+        DUP
+        IMUL; I J R2 (Y-50)2 (X-50)2
+        
+        ADD;  I J R2 (Y-50)2+(X-50)2
+        SUB;  I J R2-(Y-50)2-(X-50)2
+
+        PUSH 1
+        MUL; I J |R2-(Y-50)2-(X-50)2|
+
+        PUSH RBP; I J |R2-(Y-50)2-(X-50)2| 10
+        JB RCHOICE; JUMP IF |R2-(Y-50)2-(X-50)2| < 10
+        
+        PUSH RSP; I J J
+        PUSH 1
+        SUB; I J J-1
+        PUSH 34; I J J-1 34
+        
+        JMP RNOCHOICE
+
+        RCHOICE:
+
+        PUSH RSP
+        PUSH 1
+        SUB
+        PUSH 35; I J J-1 35
+
+        RNOCHOICE:
+
+
+        VPOP
+
+
+    PUSH 1
+    SUB
+
+    DUP
+    PUSH 0
+    JNE FLAG2
+    POP RCX; CLEAR 1 NUM FROM STACK
+
+
+    VFL
+
+    PUSH 0
+    PUSH 10
+    VPOP
+    PUSH 1
+    PUSH 13
+    VPOP
+
+    VFL
+
+PUSH 1
+SUB
+
+DUP
+PUSH 0
+JNE FLAG1
+
+HLT 
