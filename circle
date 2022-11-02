@@ -66,7 +66,7 @@ POP RDX; I
     DUP
     PUSH 0
     JNE FLAG2
-    POP RCX; CLEAR 1 NUM FROM STACK
+    POP RCX; CLEAR 1 NUM FROM STACK asasd asdas asd asd asd a sdas dd
 
 
     VFL

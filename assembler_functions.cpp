@@ -84,12 +84,40 @@ void devide_in_lines(ass_prog_t *ass_prog)
         }
     }
 
-    for(size_t i = 0; i < ass_prog->prog_lines_size; i++)
-    {
-        printf("%p\n", ass_prog->prog_lines[i]);
-        printf("%s\n\n", ass_prog->prog_lines[i]);
-    }
+    // for(size_t i = 0; i < ass_prog->prog_lines_size; i++)
+    // {
+    //     printf("%p\n", ass_prog->prog_lines[i]);
+    //     printf("%s\n\n", ass_prog->prog_lines[i]);
+    // }
 } 
+
+size_t count_words(char *str)
+{
+    printf("###%s\n", str);
+    size_t count = 0;   
+    size_t len = str_length(str);
+
+    size_t i = 0;
+
+    while(true)
+    {
+        while(isalnum(str[i]))
+        {
+            i++;
+        }
+        while(!isalnum(str[i]))
+        {
+            if(str[i] == 0)
+            {
+                count++;
+                printf("#%d\n", count);
+                return count;
+            }
+            i++;
+        }    
+        count++;
+    }
+}
 
 ass_registers get_reg_num(const char *reg, ass_prog_t *ass_prog)
 {

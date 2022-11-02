@@ -95,4 +95,6 @@ cmd_type get_cmd_num(char *line);
 
 void error_print(int error_num);
 
+size_t count_words(char *str);
+
 #endif //ASSEMBLER_FUNCTIONS_H
