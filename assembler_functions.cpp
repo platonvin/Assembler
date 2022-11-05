@@ -98,6 +98,16 @@ size_t count_words(char *str)
     size_t len = str_length(str);
 
     size_t i = 0;
+    bool is_any_word = false;
+    if(isalnum(str[0]))
+    {
+        is_any_word = true;
+    }
+    
+    if(str_chr(str, ':') != nullptr) 
+    {
+        return 0;
+    }
 
     while(true)
     {
@@ -109,7 +119,10 @@ size_t count_words(char *str)
         {
             if(str[i] == 0)
             {
-                count++;
+                if(is_any_word)
+                {
+                    count++;
+                }
                 printf("#%d\n", count);
                 return count;
             }

@@ -87,4 +87,15 @@ DUP
 PUSH 0
 JNE FLAG1
 
+
+
+
+
+
+
+
+
+
+
+
 HLT 

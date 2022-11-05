@@ -18,7 +18,7 @@ char* str_chr(char *str, int ch)
 {              
     assert(str != nullptr); 
     
-    for(int i = 0; str[i] != 0; ++i)
+    for(int i = 0; str[i] != 0; i++)
     {
         if (str[i] == ch) 
             return &str[i];
