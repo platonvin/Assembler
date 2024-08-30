@@ -1,0 +1,3 @@
+push rbx+7
+out
+hlt

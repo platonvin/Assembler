@@ -8,18 +8,17 @@ CPU emulator for custom ASM language
 
 ## Installation
 - Get source code 
-`git clone https://github.com/platonvin/Assembler`
+  - `git clone https://github.com/platonvin/Assembler`
 - Build
-`cd Assembler`
-
-`make`
+  - `cd Assembler`
+  - `make`
 
 
 ## Usage
 `assembler dir/filename [--log]` - compiles text assembly into bytecode. Compiled file is placed near source file
  - [--log] means you either pass --log or nothing
 
-`processor dir/filename [--log]` - runs bytecode
+`processor dir/filename [--log]` - runs bytecode. `processor` will try to find _dir/filename.compiled_ first, then _dir/filename_
 
 ## Examples
 in _programs/_ you can find few examples
@@ -31,7 +30,7 @@ in _programs/_ you can find few examples
      <width> <height>
      ```
      e.g.:
-      - ```bash
+      ```bash
         assembler programs/circle
         processor programs/circle.compiled
         12 13
