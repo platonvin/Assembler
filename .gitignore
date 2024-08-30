@@ -1,0 +1,4 @@
+obj/*
+*.exe
+compile_flags.txt
+log_file.txt
