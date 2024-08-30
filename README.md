@@ -27,13 +27,13 @@ in _programs/_ you can find few examples
      ```bash
      assembler programs/circle
      processor programs/circle.compiled
-     <width> <height>
+     <radius> <threshold>
      ```
      e.g.:
       ```bash
         assembler programs/circle
         processor programs/circle.compiled
-        12 13
+        42 100
      ```
  - **factor** - calculates factorial
    valid usage:

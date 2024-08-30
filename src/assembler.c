@@ -1,5 +1,6 @@
 #include "assembler_functions.h"
 #include "string_funcs.h"
+#include <stdlib.h>
 
 int main(int argc, char **argv) 
 {
