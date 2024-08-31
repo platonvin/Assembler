@@ -11,15 +11,17 @@ processor_objs := \
 
 all: init assembler processor
 
+flags = -O3
+# flags = -O0 -g
 obj/%.o: src/%.c
-	cc $(args) -std=c99 -O3 -MMD -MP -c $< -o $@
+	cc $(args) -std=c99 $(flags) -MMD -MP -c $< -o $@
 DEPS = $(objs:.o=.d)
 -include $(DEPS)
 
 assembler: $(assembler_objs)
-	g++ -o assembler $(assembler_objs) -O3 -std=c99
+	g++ -o assembler $(assembler_objs) $(flags) -std=c99
 processor: $(processor_objs)
-	g++ -o processor $(processor_objs) -O3 -std=c99
+	g++ -o processor $(processor_objs) $(flags) -std=c99
 
 clean:
 ifeq ($(OS),Windows_NT)

@@ -6,6 +6,7 @@
 #include <math.h>
 #include <getopt.h>
 #include <string.h>
+#include <stdlib.h>
 
 bool detect_logger(int argc, char **argv)
 {

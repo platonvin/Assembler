@@ -1,4 +1,7 @@
 obj/*
 *.exe
+*.compiled
+assembler
+processor
 compile_flags.txt
 log_file.txt
