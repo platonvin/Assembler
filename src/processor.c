@@ -32,6 +32,7 @@ bool detect_logger(int argc, char **argv)
 
     return should_log;
 }
+
 int main(int argc, char **argv) 
 {
     char program_name_orig[256] = {0};
