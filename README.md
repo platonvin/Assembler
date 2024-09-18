@@ -1,3 +1,4 @@
+[![Build](https://github.com/platonvin/Assembler/actions/workflows/build.yml/badge.svg)](https://github.com/platonvin/Assembler/actions/workflows/build.yml)
 
 # Assembler
 
