@@ -15,12 +15,3 @@ jobs:
         
       - name: Build assembler & processor
         run: make
-        
-      - name: Store executables
-        uses: actions/upload-artifact@v4
-        with:
-          name: stored_asm
-          path: |
-            assembler
-            processor
-          if-no-files-found: error

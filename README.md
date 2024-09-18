@@ -55,117 +55,28 @@ in _programs/_ you can find few examples
 ## Language reference
     All instructions can also be found in [commands.h](src/defines/commands.h)
 
-> HLT
-> - **Opcode:** 0x00
-> - **Operands:** None
-> - **Description:** Halts program execution and terminates the emulator.
-
-> PUSH
-> - **Opcode:** 0x01
-> - **Operands:** 1
-> - **Description:** Pushes a value onto the stack. The value can be sourced from a register, an immediate value, or a VRAM address.
-
-> POP
-> - **Opcode:** 0x02
-> - **Operands:** 1
-> - **Description:** Pops a value from the stack. The value can be stored in a register or VRAM, or discarded.
-
-> ADD
-> - **Opcode:** 0x03
-> - **Operands:** None
-> - **Description:** Adds the top two stack values and pushes the result back onto the stack.
-
-> SUB
-> - **Opcode:** 0x04
-> - **Operands:** None
-> - **Description:** Subtracts the second stack value from the first and pushes the result back onto the stack.
-
-> IMUL
-> - **Opcode:** 0x05
-> - **Operands:** None
-> - **Description:** Multiplies the top two stack values (signed multiplication) and pushes the result.
-
-> MUL
-> - **Opcode:** 0x06
-> - **Operands:** None
-> - **Description:** Multiplies the top two stack values (unsigned multiplication) and pushes the absolute result.
-
-> IDIV
-> - **Opcode:** 0x07
-> - **Operands:** None
-> - **Description:** Divides the first stack value by the second (signed division) and pushes the result.
-
-> DIV
-> - **Opcode:** 0x08
-> - **Operands:** None
-> - **Description:** Divides the first stack value by the second (unsigned division) and pushes the absolute result.
-
-> OUT
-> - **Opcode:** 0x09
-> - **Operands:** None
-> - **Description:** Pops and prints the top stack value.
-
-> IN
-> - **Opcode:** 0x0a
-> - **Operands:** None
-> - **Description:** Reads an input value and pushes it onto the stack.
-
-> JB
-> - **Opcode:** 0x0b
-> - **Operands:** 1
-> - **Description:** Jumps to the specified address if the first stack value is less than the second.
-
-> JBE
-> - **Opcode:** 0x0c
-> - **Operands:** 1
-> - **Description:** Jumps to the specified address if the first stack value is less than or equal to the second.
-
-> JA
-> - **Opcode:** 0x0d
-> - **Operands:** 1
-> - **Description:** Jumps to the specified address if the first stack value is greater than the second.
-
-> JAE
-> - **Opcode:** 0x0e
-> - **Operands:** 1
-> - **Description:** Jumps to the specified address if the first stack value is greater than or equal to the second.
-
-> JE
-> - **Opcode:** 0x0f
-> - **Operands:** 1
-> - **Description:** Jumps to the specified address if the first stack value equals the second.
-
-> JNE
-> - **Opcode:** 0x10
-> - **Operands:** 1
-> - **Description:** Jumps to the specified address if the first stack value is not equal to the second.
-
-> JMP
-> - **Opcode:** 0x11
-> - **Operands:** 1
-> - **Description:** Unconditional jump to the specified address.
-
-> NEG
-> - **Opcode:** 0x12
-> - **Operands:** None
-> - **Description:** Negates the top stack value and pushes the result.
-
-> SQRT
-> - **Opcode:** 0x13
-> - **Operands:** None
-> - **Description:** Computes the square root of the top stack value and pushes the result.
-
-> DUP
-> - **Opcode:** 0x14
-> - **Operands:** None
-> - **Description:** Duplicates the top stack value and pushes both copies.
-
-> VPOP
-> - **Opcode:** 0x15
-> - **Operands:** None
-> - **Description:** Pops two values and stores the second in VRAM at the index specified by the first.
-
-> VFL
-> - **Opcode:** 0x16
-> - **Operands:** None- 
-> - **Description:** Outputs VRAM content to the screen and clears VRAM up to the first zero or MAX_VRAM
+| Instruction | Opcode | Operands | Description | 
+| --- | --- | --- | --- | 
+| HLT | 0x00 | None | Halts program execution and terminates the emulator. | 
+| PUSH | 0x01 | 1 | Pushes a value onto the stack (from register, immediate value, or VRAM address). | 
+| POP | 0x02 | 1 | Pops a value from the stack (into register, VRAM, or discarded). | 
+| ADD | 0x03 | None | Adds the top two stack values and pushes the result. | 
+| SUB | 0x04 | None | Subtracts the second stack value from the first and pushes the result. | 
+| IMUL | 0x05 | None | Multiplies the top two stack values (signed) and pushes the result. | 
+| MUL | 0x06 | None | Multiplies the top two stack values (unsigned) and pushes the absolute result. | 
+| IDIV | 0x07 | None | Divides the first stack value by the second (signed) and pushes the result. | 
+| DIV | 0x08 | None | Divides the first stack value by the second (unsigned) and pushes the absolute result. | 
+| OUT | 0x09 | None | Pops and prints the top stack value. | 
+| IN | 0x0a | None | Reads an input value and pushes it onto the stack. | 
+| JB | 0x0b | 1 | Jumps to the specified address if the first stack value is less than the second. | 
+| JBE | 0x0c | 1 | Jumps to the specified address if the first stack value is less than or equal to the second. | 
+| JA | 0x0d | 1 | Jumps to the specified address if the first stack value is greater than the second. | 
+| JAE | 0x0e | 1 | Jumps to the specified address if the first stack value is greater than or equal to the second. | 
+| JE | 0x0f | 1 | Jumps to the specified address if the first stack value equals the second. | 
+| JNE | 0x10 | 1 | Jumps to the specified address if the first stack value is not equal to the second. | 
+| JMP | 0x11 | 1 | Unconditional jump to the specified address. | 
+| NEG | 0x12 | None | Negates the top stack value and pushes the result. | 
+| SQRT | 0x13 | None | Computes the square root of the top stack value and pushes the result. | 
+| DUP | 0x14 | None | Duplicates the top stack value and pushes both copies. | 
+| VPOP | 0x15 | None | Pops two values and stores the second in VRAM at the index specified by the first. | 
+| VFL | 0x16 | None | Outputs VRAM content to the screen and clears VRAM up to the first zero or MAX_VRAM. |
