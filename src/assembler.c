@@ -1,7 +1,11 @@
 #include "assembler_functions.h"
 #include "string_funcs.h"
 #include <stdlib.h>
-#include <getopt.h>
+#ifdef _WIN32
+    #include "getopt.h"
+#else
+    #include <getopt.h>
+#endif
 #include <string.h>
 
 bool detect_logger(int argc, char **argv)

@@ -2,7 +2,7 @@
 
 # Assembler
 
-CPU emulator for custom ASM language
+CPU emulator for custom ASM language (made while learning C)
 
 - `assembler` - tool to compile text assembly to bytecode
 - `processor` - tool to run compiled bytecode

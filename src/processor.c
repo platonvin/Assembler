@@ -4,7 +4,11 @@
 #include <stdio.h>
 //clang-tidy gets crazy on codegeneration
 #include <math.h>
-#include <getopt.h>
+#ifdef _WIN32
+    #include "getopt.h"
+#else
+    #include <getopt.h>
+#endif
 #include <string.h>
 #include <stdlib.h>
 
